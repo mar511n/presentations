@@ -1,2 +1,7 @@
-# presentations
-Collection of my presentations
+# Collection of my presentations
+| Title                                                                 | Event                                                                 | Institution                                      | Language | Link       |
+|-----------------------------------------------------------------------|-----------------------------------------------------------------------|--------------------------------------------------|----------|------------|
+| Lense-Thirring-Effekt                                                 | Theory seminar                                                        | Faculty for Physics, University Duisburg-Essen     | German   | N/A        |
+| Denoising Diffusion Probabilistic Models                              | Project presentation for the course “Neural Networks and Deep Learning” | Faculty for Physics, University Duisburg-Essen     | English  | N/A        |
+| Domain decomposition in MPTRAC - Performance evaluation and scaling tests | Guest student programme                                               | Jülich Supercomputing Centre                     | English  | N/A        |
+| Auflösungseffekte in Modellen verschiedener Reynolds-Regime für Unterschallströmungen um ein Hindernis | Presentation of my Bachelor Thesis                                    | Faculty for Physics, University Duisburg-Essen     | German   | N/A        |
