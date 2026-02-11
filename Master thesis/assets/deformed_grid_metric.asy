@@ -1,12 +1,12 @@
 // asy -f png -render 5 deformed_grid_metric.asy
-size(12cm);
+size(8cm);
 import graph;
 currentlight.background = rgb(1,1,1);
 
-pen gridpen = gray(0.6)+linewidth(1.2);
-pen axespen = gray(0.3)+linewidth(1.2);
-pen connpen = red+linewidth(1.5);
-pen ptpen   = blue+linewidth(4);
+pen gridpen = gray(0.6)+linewidth(2.0);
+pen axespen = gray(0.3)+linewidth(2.0);
+pen connpen = red+linewidth(3.0);
+pen ptpen   = blue+linewidth(8);
 
 // --- Domain in "coordinate space"
 real xmin=-4, xmax=4;
@@ -17,16 +17,16 @@ pair F3(real u, real v)
 {
   return (u,v);
 }
-pair F2(real u, real v)
+pair F(real u, real v)
 {
   real a = 0.3;     // overall strength
-  real k = pi/2;
+  real k = pi*0.3;
 
   real x = u + a*sin(k*u)*cos(k*v);
   real y = v + a*cos(k*u)*sin(k*v);
   return (x,y);
 }
-pair F(real u, real v)
+pair F2(real u, real v)
 {
   real a = 0.3;      // amplitude of deformation
   real k = pi/2;     // frequency

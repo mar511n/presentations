@@ -8,9 +8,9 @@ real R=1;
 triple O=(0,0,0);
 
 pen sphpen  = gray(0.85) + opacity(0.6);
-pen edgepen = black + linewidth(1.2);
+pen edgepen = black + linewidth(2.0);
 pen planepen= rgb(0.7,0.85,1.0) + opacity(0.45);
-pen curvepen= red + linewidth(1.5);
+pen curvepen= red + linewidth(3.0);
 
 // Sphere (built-in mesh) scaled to radius R and shifted to center O
 draw(shift(O)*scale3(R)*unitsphere, sphpen);
@@ -50,8 +50,8 @@ void tangentBasis(triple P, real x1, real x2, real y1, real y2, real L=0.35)
   triple x = u*x1 + v*x2;
   triple y = u*y1 + v*y2;
 
-  draw(P--(P+0.8*L*x), orange+linewidth(1.8));
-  draw(P--(P+0.8*L*y), purple+linewidth(1.8));
+  draw(P--(P+0.8*L*x), orange+linewidth(3.0));
+  draw(P--(P+0.8*L*y), purple+linewidth(3.0));
 
   draw(P--(P+L*x), orange, Arrow3);
   draw(P--(P+L*y), purple, Arrow3);
