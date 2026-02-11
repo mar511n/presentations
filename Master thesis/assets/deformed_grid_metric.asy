@@ -19,7 +19,7 @@ pair F3(real u, real v)
 }
 pair F(real u, real v)
 {
-  real a = 0.3;     // overall strength
+  real a = 0.5;     // overall strength
   real k = pi*0.3;
 
   real x = u + a*sin(k*u)*cos(k*v);

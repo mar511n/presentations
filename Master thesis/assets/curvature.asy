@@ -8,10 +8,10 @@ currentprojection=perspective(4,6,5);
 currentlight.background = rgb(1,1,1);
 defaultpen(fontsize(18));
 
-pen gridpen  = gray(0.3)+linewidth(1.0);
-pen path1pen = red+linewidth(1.5);
-pen path2pen = blue+linewidth(1.5);
-pen ptpen    = black+linewidth(4);
+pen gridpen  = gray(0.3)+linewidth(2.0);
+pen path1pen = red+linewidth(3.0);
+pen path2pen = blue+linewidth(3.0);
+pen ptpen    = black+linewidth(8);
 pen vec1col  = orange;
 pen vec2col  = purple;
 pen sphpen   = gray(0.85)+opacity(0.55);
@@ -72,7 +72,7 @@ void drawVector(pair uv, triple v, pen p, real L=0.2)
   if(length(w) < 1e-12) return;
   w = (L/length(w))*w;
 
-  draw(r -- (r + 0.8*w), p+linewidth(1.8));
+  draw(r -- (r + 0.8*w), p+linewidth(3.0));
   draw(r -- (r + w), p+linewidth(1.0), Arrow3);
 }
 void drawVector3D(triple r, triple v, pen p, real L=0.2)
@@ -81,7 +81,7 @@ void drawVector3D(triple r, triple v, pen p, real L=0.2)
   if(length(w) < 1e-12) return;
   w = (L/length(w))*w;
 
-  draw(r -- (r + 0.8*w), p+linewidth(1.8));
+  draw(r -- (r + 0.7*w), p+linewidth(3.0));
   draw(r -- (r + w), p+linewidth(1.0), Arrow3);
 }
 
