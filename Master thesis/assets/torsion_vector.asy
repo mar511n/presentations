@@ -7,7 +7,7 @@ currentprojection=orthographic(0,-0.1,8);
 currentlight=light(white, (5,-5,10), specularfactor=3);
 
 pen manifoldpen = gray(0.85)+opacity(0.3);
-pen tangentspacepen = rgb(0.7,0.85,1.0) + opacity(0.7);
+pen tangentspacepen = rgb(0.7,0.85,1.0) + opacity(0.9);
 pen edgepen = gray(0.2) + linewidth(1.5);
 pen vectorpen = linewidth(2.0);
 pen ucol = red;
