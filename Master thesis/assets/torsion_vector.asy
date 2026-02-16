@@ -121,8 +121,8 @@ for(int i=0; i<n2; ++i) {
 }
 
 int n1 = 1;
-pair start1 = (0.2, 0.2);
-pair end1 = (0.4, 0.2);
+pair start1 = (0.4, 0.2);
+pair end1 = (0.2, 0.2);
 for(int i=0; i<n1; ++i) {
     real t1 = i/n1;
     real t2 = (i+1)/n1;

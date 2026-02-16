@@ -1,6 +1,6 @@
 // asy -f png -render 5 graphene_2d_flat_5_7_defect.asy
 
-size(12cm);
+size(24cm);
 
 // --- Parsing helpers ---
 bool isNumChar(string ch)
@@ -178,8 +178,8 @@ string positionsStr = "0.9913396167 -0.5549326773
 
 // --- Drawing parameters ---
 real connectionThreshold = 0.17;
-pen connectionPen = gray(0.15) + linewidth(3.0);
-pen dotPen = gray(0.0) + linewidth(6.0);
+pen connectionPen = gray(0.15) + linewidth(6.0);
+pen dotPen = gray(0.0) + linewidth(10.0);
 
 // --- Parse positions ---
 pair[] positions = parsePairs(positionsStr);
