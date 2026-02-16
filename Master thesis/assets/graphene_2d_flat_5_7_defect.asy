@@ -1,18 +1,10 @@
-// asy -f png -render 5 graphene_5_7_defect_positions.asy
-
-import three;
+// asy -f png -render 5 graphene_2d_flat_5_7_defect.asy
 
 size(12cm);
-currentlight.background = rgb(1,1,1);
-// A mostly top-down view so the spheres read as 2D markers.
-currentprojection=perspective(0,4,3);
-
-pen spherepen = rgb(0.10,0.10,0.10) + opacity(1.0);
 
 // --- Parsing helpers ---
 bool isNumChar(string ch)
 {
-	// digits, sign, decimal point, exponent markers
 	return (ch >= "0" && ch <= "9") || ch == "+" || ch == "-" || ch == "." || ch == "e" || ch == "E";
 }
 
@@ -45,14 +37,17 @@ pair[] parsePairs(string s)
 	for(int i=0; i < n; ++i) {
 		pts.push( (xs[2*i], xs[2*i+1]) );
 	}
-	if(xs.length % 2 == 1) {
-		write("Warning: odd count of numbers in positions string; last number ignored.");
-	}
 	return pts;
 }
 
-// --- User input ---
-// Paste your positions string here.
+real dist(pair a, pair b)
+{
+	real dx = a.x - b.x;
+	real dy = a.y - b.y;
+	return sqrt(dx*dx + dy*dy);
+}
+
+// --- Point positions ---
 string positionsStr = "0.9913396167 -0.5549326773
 0.8716330787 -0.6370449349
 0.7422973053 -0.5745218004
@@ -181,109 +176,24 @@ string positionsStr = "0.9913396167 -0.5549326773
 -1.0053165879 0.6589958861
 ";
 
-bool usePointsFile = false;
-string pointsFile = "graphene_5_7_defect_positions_points.dat";
-
-// Optional: scale coordinates (e.g., if your positions are in lattice units).
-real xyScale = 1;
-
-// Subtract the mean position from all points (centers point cloud at the origin).
-bool subtractMean = true;
-
-// Rescale so the maximum pairwise distance becomes ~2 (i.e. points lie roughly in [-1,1]).
-// This uses the *maximum distance between points* as requested.
-bool rescaleByMaxPairwiseDistance = true;
-
-// Also subtract the mean of the computed z-values (centers in z).
-bool subtractMeanZ = true;
-
-// Base sphere radius (before any rescaling). It will be scaled by the same factor as the points.
-real r0 = 0.02;
-
-// Draw connection lines between points closer than this threshold.
-// Distance is computed in the (x,y) plane AFTER shift+scaling.
+// --- Drawing parameters ---
 real connectionThreshold = 0.17;
-pen connectionPen = gray(0.15) + linewidth(4.0);
+pen connectionPen = gray(0.15) + linewidth(3.0);
+pen dotPen = gray(0.0) + linewidth(6.0);
 
-pair[] positions;
-if(usePointsFile) {
-	file f = input(pointsFile);
-	while(true) {
-		if(eof(f)) break;
-		real x = f;
-		if(eof(f)) break;
-		real y = f;
-		positions.push((x,y));
-	}
-} else {
-	positions = parsePairs(positionsStr);
-}
+// --- Parse positions ---
+pair[] positions = parsePairs(positionsStr);
 
-pair meanPos = (0,0);
-if(positions.length > 0) {
-	for(int i=0; i < positions.length; ++i) meanPos += positions[i];
-	meanPos *= 1/positions.length;
-}
-
-real dist(pair a, pair b)
-{
-	real dx = a.x - b.x;
-	real dy = a.y - b.y;
-	return sqrt(dx*dx + dy*dy);
-}
-
-real pointScale = 1;
-
-// --- Apply shifting/scaling before drawing ---
-pair[] pts2;
+// --- Draw connections ---
 for(int i=0; i < positions.length; ++i) {
-	pair p = positions[i];
-	if(subtractMean) p -= meanPos;
-	p *= xyScale;
-	pts2.push(p);
-}
-
-if(rescaleByMaxPairwiseDistance && pts2.length > 1) {
-	real maxD = 0;
-	for(int i=0; i < pts2.length; ++i) {
-		for(int j=i+1; j < pts2.length; ++j) {
-			real d = dist(pts2[i], pts2[j]);
-			if(d > maxD) maxD = d;
-		}
-	}
-	if(maxD > 0) pointScale = 2/maxD;
-}
-
-for(int i=0; i < pts2.length; ++i) pts2[i] *= pointScale;
-
-real r = r0 * pointScale;
-
-triple[] pts3;
-real meanZ = 0;
-for(int i=0; i < pts2.length; ++i) {
-	pair p = pts2[i];
-	real z = 0.0;//exp(-0.5*(p.x/0.2)**2)*0.1 * (tanh(3*p.y)+1.0);
-	meanZ += z;
-	pts3.push((p.x, p.y, z));
-}
-if(subtractMeanZ && pts3.length > 0) {
-	meanZ *= 1/pts3.length;
-	for(int i=0; i < pts3.length; ++i) pts3[i] -= (0,0,meanZ);
-}
-
-// --- Connection lines ---
-if(connectionThreshold > 0 && pts3.length > 1) {
-	for(int i=0; i < pts3.length; ++i) {
-		for(int j=i+1; j < pts3.length; ++j) {
-			if(dist(pts2[i], pts2[j]) < connectionThreshold) {
-				draw(pts3[i]--pts3[j], connectionPen);
-			}
+	for(int j=i+1; j < positions.length; ++j) {
+		if(dist(positions[i], positions[j]) < connectionThreshold) {
+			draw(positions[i]--positions[j], connectionPen);
 		}
 	}
 }
 
-// --- Draw spheres ---
-for(int i=0; i < pts3.length; ++i) {
-	draw(shift(pts3[i])*scale3(r)*unitsphere, spherepen);
+// --- Draw points ---
+for(int i=0; i < positions.length; ++i) {
+	dot(positions[i], dotPen);
 }
-
