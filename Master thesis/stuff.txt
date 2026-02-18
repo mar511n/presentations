@@ -1,0 +1,13 @@
+\vspace{-12pt}
+\subsection*{Fourier transform}
+\begin{align*}
+&i\p_t \vec{\psi}(\vec{k}) = \bm{h}(\vec{k})\vec{\psi}(\vec{k}) \\
+&\bm{h}(\vec{k})=\begin{pmatrix}
+0 & f(\vec{k}) \\ f^*(\vec{k}) & 0
+\end{pmatrix}, \quad f(\vec{k})=\sum_{j=1}^{3} e^{i\vec{k}\cdot \vec{d}_j}
+\end{align*}
+\vspace{-12pt}
+\subsection*{Linear dispersion around Dirac points}
+\begin{align*}
+\vec{k} = \vec{K}^{(s)}+\vec{\delta k} \quad \Longrightarrow \quad \bm{h}(\vec{k}) \approx -\frac{3}{2} \vec{\delta k}\cdot \vec{\bm{\sigma}}
+\end{align*}
